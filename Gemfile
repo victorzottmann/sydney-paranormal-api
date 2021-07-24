@@ -23,7 +23,7 @@ gem 'puma', '~> 5.0'
 gem 'bootsnap', '>= 1.4.4', require: false
 
 # Use Rack CORS for handling Cross-Origin Resource Sharing (CORS), making cross-origin AJAX possible
-# gem 'rack-cors'
+gem 'rack-cors'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
@@ -44,3 +44,7 @@ gem "rspec-rails", "~> 5.0"
 
 gem 'rails-controller-testing'
 
+# add devise, cancancan and rolify to manage user roles and auth
+gem "devise", "~> 4.8"
+gem "cancancan", "~> 3.3"
+gem "rolify", "~> 6.0"
