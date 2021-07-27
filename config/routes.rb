@@ -1,6 +1,5 @@
 Rails.application.routes.draw do
-  scope '/auth' do
-    get '/users', to: 'users#index'
-    post '/sign_up', to: 'users#create'
-  end
+  resources :users, only: [:index, :create]
+
+  post "/login", to: "users#login"
 end
