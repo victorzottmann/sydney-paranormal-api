@@ -1,13 +1,10 @@
-### Get users
-GET http://localhost:4000/auth/users
-
 ### Create user
-POST http://localhost:4000/auth/sign_up
+POST http://localhost:4000/api/sign_up
 Content-Type: application/json
 
 {
-  "username": "victor3",
-  "email": "victor3@gmail.com",
+  "username": "random",
+  "email": "random@gmail.com",
   "password": "password",
   "password_confirmation": "password"
 }
