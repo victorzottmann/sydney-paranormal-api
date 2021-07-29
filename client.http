@@ -1,0 +1,10 @@
+### Create user
+POST http://localhost:4000/api/sign_up
+Content-Type: application/json
+
+{
+  "username": "random",
+  "email": "random@gmail.com",
+  "password": "password",
+  "password_confirmation": "password"
+}
