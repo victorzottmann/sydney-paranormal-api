@@ -6,6 +6,20 @@ Rails.application.routes.draw do
     get '/pins/:id', to: 'pins#show'
     put '/pins/:id', to: 'pins#update'
     delete '/pins/:id', to: 'pins#destroy'
+
+    get '/pin_families/:id', to: 'pin_families#show'
+
+    get '/notes', to: 'notes#index'
+    post '/notes', to: 'notes#create'
+    get '/notes/:id', to: 'notes#show'
+    put '/notes/:id', to: 'notes#update'
+    delete '/notes/:id', to: 'notes#destroy'    
+
+    get '/comments', to: 'comments#index'
+    post '/comments', to: 'comments#create'
+    get '/comments/:id', to: 'comments#show'
+    put '/comments/:id', to: 'comments#update'
+    delete '/comments/:id', to: 'comments#destroy'
   end
 
 end
