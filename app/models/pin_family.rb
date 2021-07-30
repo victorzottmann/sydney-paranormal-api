@@ -1,0 +1,3 @@
+class PinFamily < ApplicationRecord
+
+end
