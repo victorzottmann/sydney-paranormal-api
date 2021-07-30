@@ -10,11 +10,63 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_07_27_084505) do
+
+ActiveRecord::Schema.define(version: 2021_07_28_180850) do
+
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
+
+  create_table "comments", force: :cascade do |t|
+    t.text "text"
+    t.date "date"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.bigint "note_id"
+    t.index ["note_id"], name: "index_comments_on_note_id"
+  end
+
+  create_table "locations", force: :cascade do |t|
+    t.string "street"
+    t.string "suburb"
+    t.string "city"
+    t.string "state"
+    t.string "country"
+    t.float "latitude"
+    t.float "longitude"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.bigint "pin_id"
+    t.index ["pin_id"], name: "index_locations_on_pin_id"
+  end
+
+  create_table "notes", force: :cascade do |t|
+    t.string "title"
+    t.text "description"
+    t.date "date"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.bigint "pin_id"
+    t.index ["pin_id"], name: "index_notes_on_pin_id"
+  end
+
+  create_table "pin_families", force: :cascade do |t|
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.bigint "pin_id"
+    t.index ["pin_id"], name: "index_pin_families_on_pin_id"
+  end
+
+  create_table "pins", force: :cascade do |t|
+    t.string "title"
+    t.text "description"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.bigint "pin_family_id"
+    t.index ["pin_family_id"], name: "index_pins_on_pin_family_id"
+  end
+  
   create_table "users", force: :cascade do |t|
     t.string "username"
     t.string "email"
@@ -22,5 +74,11 @@ ActiveRecord::Schema.define(version: 2021_07_27_084505) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
+
+  add_foreign_key "comments", "notes"
+  add_foreign_key "locations", "pins"
+  add_foreign_key "notes", "pins"
+  add_foreign_key "pin_families", "pins"
+  add_foreign_key "pins", "pin_families"
 
 end
