@@ -1,42 +1,38 @@
 class Notes < ApplicationController
 
-    def index
+  def index
+    @notes = Note.where(pin_id: note_params[:pin_id])
+    render json: @notes
+  end
 
-        @notes = Note.where(pin_id: note_params[:pin_id])
-        render json: @notes
+  def create
+    @note = Note.create(new_params)
 
+    if @note.errors.any?
+      render json: @note.errors, status: :unprocessable_entity
+    else
+      render json: @note, status: 201
     end
+  end
 
-    def create
+  def show
 
-        @note = Note.create(new_params)
+  end
 
-        if @note.errors.any?
-            render json: @note.errors, status: :unprocessable_entity
-        else
-            render json: @note, status: 201
-        end
+  def update
 
-    end
+  end
 
-    def show
+  def destroy
 
-    end
-
-    def update
-
-    end
-
-    def destroy
-
-    end
+  end
 
 
 
-    private
+  private
 
-    def note_params
-        params.require(:pin).permit(:title, :description, :date, :pin_id)
-    end
+  def note_params
+    params.require(:pin).permit(:title, :description, :date, :pin_id)
+  end
 
 end

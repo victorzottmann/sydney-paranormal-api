@@ -21,10 +21,10 @@ class UsersController < ApplicationController
 
   # LOG IN
   def login
-    @user = User.find_by(username: params[:username])
+    @user = User.find_by(email: params[:email])
     if @user && @user.authenticate(params[:password])
       # the method encode_token is defined in the Application Controller 
-      token = encode_token({user_id: @user.id, username: @user.username})
+      token = encode_token({user_id: @user.id, email: @user.email})
       render json: {user: @user, token: token}, status: 200 # OK
     else
       render json: {error: "Invalid username or password"}, status: 401 # Not Authenticated
