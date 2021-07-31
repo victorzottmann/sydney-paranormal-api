@@ -10,13 +10,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-
-ActiveRecord::Schema.define(version: 2021_07_28_180850) do
-
+ActiveRecord::Schema.define(version: 2021_07_30_095738) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
-
 
   create_table "comments", force: :cascade do |t|
     t.text "text"
@@ -24,7 +21,9 @@ ActiveRecord::Schema.define(version: 2021_07_28_180850) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.bigint "note_id"
+    t.bigint "user_id"
     t.index ["note_id"], name: "index_comments_on_note_id"
+    t.index ["user_id"], name: "index_comments_on_user_id"
   end
 
   create_table "locations", force: :cascade do |t|
@@ -48,7 +47,9 @@ ActiveRecord::Schema.define(version: 2021_07_28_180850) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.bigint "pin_id"
+    t.bigint "user_id"
     t.index ["pin_id"], name: "index_notes_on_pin_id"
+    t.index ["user_id"], name: "index_notes_on_user_id"
   end
 
   create_table "pin_families", force: :cascade do |t|
@@ -64,9 +65,11 @@ ActiveRecord::Schema.define(version: 2021_07_28_180850) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.bigint "pin_family_id"
+    t.bigint "user_id"
     t.index ["pin_family_id"], name: "index_pins_on_pin_family_id"
+    t.index ["user_id"], name: "index_pins_on_user_id"
   end
-  
+
   create_table "users", force: :cascade do |t|
     t.string "username"
     t.string "email"
@@ -76,9 +79,11 @@ ActiveRecord::Schema.define(version: 2021_07_28_180850) do
   end
 
   add_foreign_key "comments", "notes"
+  add_foreign_key "comments", "users"
   add_foreign_key "locations", "pins"
   add_foreign_key "notes", "pins"
+  add_foreign_key "notes", "users"
   add_foreign_key "pin_families", "pins"
   add_foreign_key "pins", "pin_families"
-
+  add_foreign_key "pins", "users"
 end
