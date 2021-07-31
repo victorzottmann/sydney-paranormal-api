@@ -1,42 +1,37 @@
 class CommentsController < ApplicationController
 
-    def index
+  def index
+    @comments = Comment.where(note_id: comment_params[:note_id])
+    render json: @comments
+  end
 
-        @comments = Comment.where(note_id: comment_params[:note_id])
-        render json: @comments
-
+  def create
+    @comment = Note.create(new_params)
+    if @comment.errors.any?
+      render json: @comment.errors, status: :unprocessable_entity
+    else
+      render json: @comment, status: 201
     end
+  end
 
-    def create
+  def show
 
-        @comment = Note.create(new_params)
+  end
 
-        if @comment.errors.any?
-            render json: @comment.errors, status: :unprocessable_entity
-        else
-            render json: @comment, status: 201
-        end
+  def update
 
-    end
+  end
 
-    def show
+  def destroy
 
-    end
-
-    def update
-
-    end
-
-    def destroy
-
-    end
+  end
 
 
 
-    private
+  private
 
-    def comment_params
-        params.require(:pin).permit(:description, :date, :note_id)
-    end
+  def comment_params
+      params.require(:pin).permit(:description, :date, :note_id)
+  end
 
 end

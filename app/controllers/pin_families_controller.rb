@@ -1,10 +1,9 @@
 class PinFamiliesController < ApplicationController
+  def index
 
-    def index
+  end
 
-    end
+  def show
 
-    def show
-
-    end
+  end
 end
