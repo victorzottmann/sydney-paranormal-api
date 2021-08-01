@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   scope '/api' do
     post '/signup', to: 'users#create'
     post '/login', to: 'users#login'
+    get '/get_user', to: 'users#get_user'
     
     get '/pins', to: 'pins#index'
     post '/pins', to: 'pins#create'
