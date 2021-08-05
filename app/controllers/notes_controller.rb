@@ -1,4 +1,4 @@
-class Notes < ApplicationController
+class NotesController < ApplicationController
 
   def index
     @notes = Note.where(pin_id: note_params[:pin_id])
