@@ -44,7 +44,12 @@ class UsersController < ApplicationController
     if a != nil 
       user_id = a[0]['user_id']
       @user = User.find(user_id)
-      render json: {loggedin: true, user_name: @user['username'], user_id: user_id}, status: 200 # OK
+      render json: {
+        loggedin: true, 
+        user_name: @user['username'], 
+        user_id: user_id
+      }, 
+      status: 200 # OK
     else
       render json: {loggedin: false}, status: 200 # OK
     end

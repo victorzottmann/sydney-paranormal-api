@@ -5,3 +5,32 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+
+if Location.count == 0
+  locations = Location.create([
+    {
+      title: "David Habour's Female Doppelganger",
+      description: "There's been a rumour that a hideous female version of the actor David Habour is haunting civilians near the water. Beware!",
+      street: "14 Darling Dr",
+      suburb: "Sydney",
+      state: "NSW",
+      country: "Australia"
+    },
+    {
+      title: "The Phantom of the Opera",
+      description: "A bunch of former opera singers have turned into haunted phantoms!",
+      street: "1 Conservatorium Rd",
+      suburb: "Sydney",
+      state: "NSW",
+      country: "Australia"
+    },
+    {
+      title: "The Garden Ghost",
+      description: "A strange ghost is haunting civilians at the botanic gardens!",
+      street: "Fleet Steps Rd",
+      suburb: "Sydney",
+      state: "NSW",
+      country: "Australia"
+    }
+  ])
+end
