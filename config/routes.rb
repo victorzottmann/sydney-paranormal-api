@@ -7,7 +7,7 @@ Rails.application.routes.draw do
     post '/signup', to: 'users#create'
     post '/login', to: 'users#login'
     get '/get_user', to: 'users#get_user'
-
+    
     post '/add_location', to: 'locations#create'
     
     resources :pins
