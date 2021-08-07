@@ -6,8 +6,6 @@ class PinsController < ApplicationController
   end
 
   def create
-
-
     new_params = {"title": pin_params['title'], "user_id": pin_params['user_id']}
 
     @pin = Pin.create(new_params)
@@ -26,14 +24,11 @@ class PinsController < ApplicationController
     @pin.pin_family_id = @pin_family.id
 
     end
-
- 
-
   end
 
   private
 
-  def pin_params
-    params.require(:pin).permit(:title, :user_id, :description, pin_family_attributes: [:pin_id])
-  end
+    def pin_params
+      params.require(:pin).permit(:title, :user_id, :description, pin_family_attributes: [:pin_id])
+    end
 end
