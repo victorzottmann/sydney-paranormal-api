@@ -2,31 +2,18 @@ class LocationsController < ApplicationController
   def index
     @locations = Location.all
 
-    @markers = [
-      {
-        features: @locations.map { |location| {
-          type: "Feature",
-          properties: {
-            id: location[:id],
-            title: location[:title],
-            description: location[:description],
-            street: location[:street],
-            suburb: location[:suburb],
-            state: location[:state],
-            country: location[:country]
-          },
-          geometry: {
-            coordinates: [
-              location[:longitude],
-              location[:latitude]
-            ]
-          },
-          type: "Point"
-        }},
-        type: "FeatureCollection"
-      }
-    ]
-
+    @markers = @locations.map{ |location| {
+      id: location[:id],
+      title: location[:title],
+      description: location[:description],
+      street: location[:street],
+      suburb: location[:suburb],
+      state: location[:state],
+      country: location[:country],
+      latitude: location[:latitude],
+      longitude: location[:longitude]
+    }}
+    
     render json: @markers
   end
 
