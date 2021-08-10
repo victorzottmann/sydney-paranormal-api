@@ -16,7 +16,11 @@ class ApplicationController < ActionController::API
   end
 
   def auth_header
-    request.headers['Authorization']
+    if !(request['headers'] == nil)
+      return request['headers']['Authorization']
+    else
+      return request.headers['Authorization']
+    end
   end
 
   def decoded_token

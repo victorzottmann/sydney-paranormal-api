@@ -6,11 +6,18 @@ class CommentsController < ApplicationController
   end
 
   def create
-    @comment = Note.create(new_params)
-    if @comment.errors.any?
-      render json: @comment.errors, status: :unprocessable_entity
-    else
-      render json: @comment, status: 201
+
+    puts comment_params[:user_id]
+    puts decoded_token[0]["user_id"]
+
+    if comment_params[:user_id] == decoded_token[0]["user_id"]
+        puts "CREATE"
+        @comment = Comment.create(comment_params)
+        if @comment.errors.any?
+          render json: @comment.errors, status: :unprocessable_entity
+        else
+          render json: @comment, status: 201
+        end
     end
   end
 
@@ -31,7 +38,8 @@ class CommentsController < ApplicationController
   private
 
   def comment_params
-      params.require(:pin).permit(:description, :date, :note_id)
+      params.require(:comment).permit(:text, :date, :note_id, :user_id)
   end
+
 
 end

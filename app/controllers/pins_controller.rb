@@ -27,13 +27,32 @@ class PinsController < ApplicationController
 
     end
 
- 
+  end
+
+
+  def show
+    puts "AAAAAAAAAAAAAA"
+
+    puts pin_param
+
+    @notes = Note.all
+    render json: @notes, status: 202
+
+  end
+
+  def update
+
 
   end
 
   private
 
   def pin_params
-    params.require(:pin).permit(:title, :user_id, :description, pin_family_attributes: [:pin_id])
+    params.require(:pin).permit(:id, :title, :user_id, :description, pin_family_attributes: [:pin_id])
   end
+
+  def pin_param
+    params.permit(:id)
+  end
+
 end
