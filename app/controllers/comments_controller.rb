@@ -6,12 +6,7 @@ class CommentsController < ApplicationController
   end
 
   def create
-
-    puts comment_params[:user_id]
-    puts decoded_token[0]["user_id"]
-
     if comment_params[:user_id] == decoded_token[0]["user_id"]
-        puts "CREATE"
         @comment = Comment.create(comment_params)
         if @comment.errors.any?
           render json: @comment.errors, status: :unprocessable_entity

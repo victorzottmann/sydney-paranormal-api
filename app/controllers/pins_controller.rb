@@ -31,13 +31,15 @@ class PinsController < ApplicationController
 
 
   def show
-    puts "AAAAAAAAAAAAAA"
-
-    puts pin_param
-
+    # item.created_at.strftime('%I:%M %p UTC, %a %d %b %Y')
     @notes = Note.all
-    render json: @notes, status: 202
-
+    notes = []
+    for item in @notes
+      notes.push({description:item.description, created_at:(item.created_at.strftime('%I:%M %p UTC, %a %d %b %Y')), user_name:User.find(item.user_id).username, id:item.id, title:item.title})
+    end
+    render json: notes, status: 201
+    # @notes = Note.all
+    # render json: @notes, status: 202
   end
 
   def update
