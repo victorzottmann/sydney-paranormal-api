@@ -15,7 +15,7 @@ class PinsController < ApplicationController
       longitude: location[:longitude]
     }}
     
-    render json: @markers
+    render json: @locations
   end
 
   def show
@@ -48,30 +48,28 @@ class PinsController < ApplicationController
   end
 
   def create
-    new_params = {"title": pin_params['title'], "user_id": pin_params['user_id']}
 
-    @pin = Pin.create(new_params)
+    @pin = Pin.create(pin_params)
     if @pin.errors.any?
       render json: @pin.errors, status: :unprocessable_entity
     else
-    render json: @pin, status: 201
+      render json: @pin, status: 201
     end
 
     if pin_params[:pin_family_attributes] != nil
-    @pin_family = PinFamily.where(pin_id: pin_params[:pin_family_attributes][0][:pin_id])[0]
-    if @pin_family == nil
+      @pin_family = PinFamily.where(pin_id: pin_params[:pin_family_attributes][0][:pin_id])[0]
+      if @pin_family == nil
         @pin_family = PinFamily.create(pin_id: pin_params[:pin_family_attributes][0][:pin_id])
-    end
-
+      end
     @pin.pin_family_id = @pin_family.id
-
     end
   end
 
   private
-  def set_pin
-    @pin = Pin.find(params[:id])
-  end
+    def set_pin
+      @pin = Pin.find(params[:id])
+    end
+
     def pin_params
       params.require(:pin).permit(:user_id, :title, :description, :street, :suburb, :state, :country, pin_family_attributes: [:pin_id])
     end
