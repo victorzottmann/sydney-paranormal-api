@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
 
   resources :users, only: [:index, :create]
-  resources :pins, only: [:index, :show, :create]
+  resources :pins, only: [:index, :create]
   
   scope '/api' do
     post '/signup', to: 'users#create'

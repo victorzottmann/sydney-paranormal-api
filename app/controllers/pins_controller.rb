@@ -18,35 +18,6 @@ class PinsController < ApplicationController
     render json: @locations
   end
 
-  def show
-    def show
-      @pin = Pin.find(params[:id])
-      render json: {
-        features: [
-          { 
-            type: "Feature", 
-            properties: {
-              title: @pin.title, 
-              description: @pin.description,
-              street: @pin.street,
-              suburb: @pin.suburb,
-              state: @pin.state,
-              country: @pin.country
-            },
-            geometry: {
-              coordinates: [
-                @pin.longitude,
-                @pin.latitude
-              ]
-            },
-            type: "Point"
-          }
-        ],
-        type: "FeatureCollection"
-      }
-    end
-  end
-
   def create
 
     @pin = Pin.create(pin_params)
