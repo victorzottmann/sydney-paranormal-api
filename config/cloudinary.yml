@@ -1,0 +1,19 @@
+---
+development:
+  cloud_name: dol06fv04
+  api_key: '366538955433493'
+  api_secret: d9KfVI6joe8zqK_Nx_K1HMGErT4
+  enhance_image_tag: true
+  static_file_support: false
+production:
+  cloud_name: dol06fv04
+  api_key: '366538955433493'
+  api_secret: d9KfVI6joe8zqK_Nx_K1HMGErT4
+  enhance_image_tag: true
+  static_file_support: true
+test:
+  cloud_name: dol06fv04
+  api_key: '366538955433493'
+  api_secret: d9KfVI6joe8zqK_Nx_K1HMGErT4
+  enhance_image_tag: true
+  static_file_support: false

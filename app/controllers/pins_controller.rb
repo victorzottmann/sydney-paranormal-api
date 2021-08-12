@@ -1,8 +1,7 @@
 class PinsController < ApplicationController
 
   def index
-    @pins = Pin.all
-    render json: @pins
+
   end
 
   def create
@@ -24,26 +23,21 @@ class PinsController < ApplicationController
     end
 
     @pin.pin_family_id = @pin_family.id
-
     end
 
   end
 
 
   def show
-    # item.created_at.strftime('%I:%M %p UTC, %a %d %b %Y')
     @notes = Note.all
     notes = []
     for item in @notes
       notes.push({description:item.description, created_at:(item.created_at.strftime('%I:%M %p UTC, %a %d %b %Y')), user_name:User.find(item.user_id).username, id:item.id, title:item.title})
     end
     render json: notes, status: 201
-    # @notes = Note.all
-    # render json: @notes, status: 202
   end
 
   def update
-
 
   end
 
