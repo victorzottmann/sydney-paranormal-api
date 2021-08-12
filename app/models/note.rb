@@ -1,5 +1,5 @@
 class Note < ApplicationRecord
-    has_many :comments
-    belongs_to :user
-    belongs_to :pin
+  belongs_to :user
+  belongs_to :pin
+  has_many :comments
 end

@@ -46,3 +46,6 @@ gem "rspec-rails", "~> 5.0"
 
 # add JWT for user authentication
 gem "jwt", "~> 2.2"
+
+# add Geocoder to convert addresses to coordinates
+gem "geocoder", "~> 1.6"

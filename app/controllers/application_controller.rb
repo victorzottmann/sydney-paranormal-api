@@ -1,10 +1,8 @@
 class ApplicationController < ActionController::API
 
-
   def encode_token(payload)
     JWT.encode(payload, 'secret_key')
   end
-
 
 
   def decode_token(payload) 
@@ -15,6 +13,7 @@ class ApplicationController < ActionController::API
     end
   end
 
+
   def auth_header
     if !(request['headers'] == nil)
       return request['headers']['Authorization']
@@ -22,6 +21,7 @@ class ApplicationController < ActionController::API
       return request.headers['Authorization']
     end
   end
+  
 
   def decoded_token
     if auth_header

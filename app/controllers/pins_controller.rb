@@ -1,17 +1,58 @@
 class PinsController < ApplicationController
 
   def index
+    @pins = Pin.all
 
+    @locations = @pins.map{ |location| {
+      id: location[:id],
+      title: location[:title],
+      description: location[:description],
+      street: location[:street],
+      suburb: location[:suburb],
+      state: location[:state],
+      country: location[:country],
+      latitude: location[:latitude],
+      longitude: location[:longitude]
+    }}
+    
+    render json: @markers
+  end
+
+  def show
+    def show
+      @pin = Pin.find(params[:id])
+      render json: {
+        features: [
+          { 
+            type: "Feature", 
+            properties: {
+              title: @pin.title, 
+              description: @pin.description,
+              street: @pin.street,
+              suburb: @pin.suburb,
+              state: @pin.state,
+              country: @pin.country
+            },
+            geometry: {
+              coordinates: [
+                @pin.longitude,
+                @pin.latitude
+              ]
+            },
+            type: "Point"
+          }
+        ],
+        type: "FeatureCollection"
+      }
+    end
   end
 
   def create
-
-
     new_params = {"title": pin_params['title'], "user_id": pin_params['user_id']}
 
     @pin = Pin.create(new_params)
     if @pin.errors.any?
-    render json: @pin.errors, status: :unprocessable_entity
+      render json: @pin.errors, status: :unprocessable_entity
     else
     render json: @pin, status: 201
     end
@@ -23,32 +64,15 @@ class PinsController < ApplicationController
     end
 
     @pin.pin_family_id = @pin_family.id
+
     end
-
-  end
-
-
-  def show
-    @notes = Note.all
-    notes = []
-    for item in @notes
-      notes.push({description:item.description, created_at:(item.created_at.strftime('%I:%M %p UTC, %a %d %b %Y')), user_name:User.find(item.user_id).username, id:item.id, title:item.title})
-    end
-    render json: notes, status: 201
-  end
-
-  def update
-
   end
 
   private
-
-  def pin_params
-    params.require(:pin).permit(:id, :title, :user_id, :description, pin_family_attributes: [:pin_id])
+  def set_pin
+    @pin = Pin.find(params[:id])
   end
-
-  def pin_param
-    params.permit(:id)
-  end
-
+    def pin_params
+      params.require(:pin).permit(:user_id, :title, :description, :street, :suburb, :state, :country, pin_family_attributes: [:pin_id])
+    end
 end
